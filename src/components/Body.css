@@ -24,3 +24,7 @@
     bottom:30px;
     right:20px;
 }
+.totalPrice{
+    position:sticky;
+    bottom:0;
+}

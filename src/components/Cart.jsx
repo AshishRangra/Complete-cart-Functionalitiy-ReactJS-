@@ -1,15 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../Context/Context";
-
+import "./Body.css";
 const Cart = () => {
   const { SelectedCartData, cartArr, setCartArr, cartItem, setCartItem } =
     useContext(Context);
-  
-
+  const [price, setPrice] = useState(0);
   useEffect(() => {
     SelectedCartData();
   }, []);
-
+  const totalPriceofProducts = () => {
+    let productPrice = 0;
+    cartArr &&
+      cartArr.map((value, index) => {
+        productPrice += value.price * value.quantity;
+        return price;
+      });
+    setPrice(Math.round(productPrice));
+  };
+ 
   const increment = (id) => {
     const updatedCartArr = cartArr.map((item) =>
       item.id === id ? { ...item, quantity: (item.quantity || 0) + 1 } : item
@@ -27,8 +35,11 @@ const Cart = () => {
     const updatedCartItem = { ...cartItem };
     updatedCartItem[id] -= 1;
     setCartItem(updatedCartItem);
+    // totalPriceofProducts();
   };
-
+  useEffect(() => {
+    totalPriceofProducts();
+  }, [cartArr, increment, decrement]);
   const RemoveItem = (id) => {
     const updatedArr = cartArr.filter((item) => item.id !== id);
     setCartArr(updatedArr);
@@ -39,8 +50,8 @@ const Cart = () => {
 
   return (
     <>
-    <h1>Cart</h1>
-      <div className="cart-container">
+      <h1>Cart</h1>
+      <div id="cart-container" className="container">
         {cartArr &&
           cartArr.map((value, index) => (
             <div className="cards" key={index}>
@@ -59,6 +70,12 @@ const Cart = () => {
               <button onClick={() => RemoveItem(value.id)}>Remove</button>
             </div>
           ))}
+      </div>
+      <div className="totalPrice">
+      
+        <h5>
+          Total Price : <span>{price}</span>{" "}
+        </h5>
       </div>
     </>
   );
