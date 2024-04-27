@@ -5,6 +5,10 @@
     flex-wrap:wrap;
     justify-content:space-between;
 }
+.navbar{
+    position:sticky;
+    top:0;
+}
 .cards{
     width:24vw;
     height:auto;
