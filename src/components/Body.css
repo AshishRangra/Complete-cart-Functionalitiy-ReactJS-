@@ -1,0 +1,14 @@
+.container{
+    display:flex;
+   
+   
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+.cards{
+    width:24vw;
+    height:auto;
+    margin:40px;
+    box-shadow:5px 5px 10px  grey;
+    padding:20px
+}
